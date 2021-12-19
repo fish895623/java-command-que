@@ -17,7 +17,7 @@ jobs:
           java-version: '11'
           check-latest: true
       - name: build gradlew
-        run: sh -c "chmod +x ./gradlew && ./gradlew build"
+        run: sh -c "chmod +x ./gradlew && ./gradlew bootJar"
 
       - name: Create Release
         id: create_release
