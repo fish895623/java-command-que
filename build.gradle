@@ -7,6 +7,10 @@ plugins {
 group = "com.github.fish895623"
 version = "0.0.1-SNAPSHOT"
 
+configurations {
+    jar.archiveName = 'commandque.jar'
+}
+
 repositories {
     mavenCentral()
 }
