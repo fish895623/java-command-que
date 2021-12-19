@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Que {
   @RequestMapping(method = RequestMethod.POST, path = "/a")
-  public InfoVO aa(@RequestBody InfoVO val) {
+  public InfoVO aa(@RequestBody InfoVO val) { // TODO change val name
     val.setT(val.getName() + "123");
     return val;
   }
