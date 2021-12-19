@@ -5,7 +5,12 @@ plugins {
 }
 
 group = "com.github.fish895623"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.102"
+
+bootJar {
+  archiveBaseName.set("command")
+  archiveVersion.set("")
+}
 
 repositories {
   mavenCentral()
