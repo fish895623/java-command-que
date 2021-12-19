@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.github.fish895623"
-version = "0.0.101"
+version = "0.0.102"
 
 bootJar {
   archiveName = 'command.jar'
