@@ -5,7 +5,7 @@
 
 # Prerequisites: appropriate project structure should exist in the repository.
 
-image: gradle:6.6.0
+image: gradle:latest
 
 pipelines:
   default:
@@ -15,7 +15,7 @@ pipelines:
           caches:
             - gradle
           script:
-            - gradle test
+            - ./gradlew test
           after-script:
             - pipe: atlassian/checkstyle-report:0.3.0
       - step:
