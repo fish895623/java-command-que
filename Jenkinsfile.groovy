@@ -9,7 +9,7 @@ pipeline {
             }
         }
         stage('Example Test') {
-            agent { docker 'openjdk:8-jre' }
+            agent { docker 'openjdk:11.0.13-slim' }
             steps {
                 echo 'Hello, JDK'
                 sh 'java -version'
