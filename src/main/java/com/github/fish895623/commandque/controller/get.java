@@ -19,6 +19,9 @@ public class get {
 
 @Controller
 class getController {
+  /**
+   * Testing
+   */
   @GetMapping(path = "/get")
   public String staticGet() {
     return "get.html";
