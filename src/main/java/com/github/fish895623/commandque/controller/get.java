@@ -20,7 +20,7 @@ public class get {
 @Controller
 class getController {
   /**
-   * Testing
+   * Testing 2
    */
   @GetMapping(path = "/get")
   public String staticGet() {
