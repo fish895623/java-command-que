@@ -14,7 +14,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Change mod
+      run: chmod +x gradlew
     - name: Build with Gradle
-      run: |
-        chmod +x ./gradlew
-        ./gradlew build
+      run: ./gradlew build
