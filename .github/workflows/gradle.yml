@@ -14,7 +14,9 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+        cache: 'gradle'
+
     - name: Change mod
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew bootJar
+      run: |
+        chmod +x gradlew 
+        ./gradlew bootJar
