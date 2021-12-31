@@ -39,6 +39,10 @@ public class sqliteManager {
     return f.exists();
   }
 
+  /**
+   * Attach to sqlite
+   */
   public void attachDatabase() {
+
   }
 }
