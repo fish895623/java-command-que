@@ -19,14 +19,15 @@ public class sqliteManager {
    * @param filename Database filename
    */
   public void createNewDatabase() {
-
-    try (Connection conn = DriverManager.getConnection(this.file)) {
-      if (conn != null) {
-        DatabaseMetaData meta = conn.getMetaData();
-        System.out.println(meta.getDriverName());
+    if (!checkFileExists()) {
+      try (Connection conn = DriverManager.getConnection(this.file)) {
+        if (conn != null) {
+          DatabaseMetaData meta = conn.getMetaData();
+          System.out.println(meta.getDriverName());
+        }
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
       }
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
     }
   }
 
