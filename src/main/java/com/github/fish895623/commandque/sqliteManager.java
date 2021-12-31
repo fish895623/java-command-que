@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class sqliteManager {
+  // TODO Change to Builder pattern
   String file;
   String filename;
 
@@ -19,7 +20,7 @@ public class sqliteManager {
    * @param filename Database filename
    */
   public void createNewDatabase() {
-    if (!checkFileExists()) {
+    if (checkFileExists() == false) {
       try (Connection conn = DriverManager.getConnection(this.file)) {
         if (conn != null) {
           DatabaseMetaData meta = conn.getMetaData();
@@ -43,6 +44,10 @@ public class sqliteManager {
    * Attach to sqlite
    */
   public void attachDatabase() {
+  }
 
+  public static void main(String[] args) {
+    sqliteManager app = new sqliteManager("a.db");
+    app.createNewDatabase();
   }
 }
