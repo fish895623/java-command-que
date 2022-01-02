@@ -17,10 +17,10 @@ repositories {
 }
 
 dependencies {
-  implementation "org.springframework.boot:spring-boot-starter-web"
+  implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.xerial:sqlite-jdbc:3.36.0.2")
-  developmentOnly "org.springframework.boot:spring-boot-devtools"
-  testImplementation "org.springframework.boot:spring-boot-starter-test"
+  developmentOnly("org.springframework.boot:spring-boot-devtools")
+  testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 test {

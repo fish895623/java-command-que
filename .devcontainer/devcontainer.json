@@ -1,27 +1,41 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/ubuntu
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/java
 {
-	"name": "Ubuntu",
+	"name": "Java",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
-		// Use hirsute or bionic on local arm64/Apple Silicon.
-		"args": { "VARIANT": "focal" }
+		"args": {
+			// Update the VARIANT arg to pick a Java version: 11, 17
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use the -bullseye variants on local arm64/Apple Silicon.
+			"VARIANT": "11",
+			// Options
+			"INSTALL_MAVEN": "false",
+			"INSTALL_GRADLE": "true",
+			"NODE_VERSION": "none"
+		}
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-
+	"settings": {
+		"java.home": "/docker-java-home"
+	},
 
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [],
+	"extensions": [
+		"vscjava.vscode-java-pack"
+	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
+	// "postCreateCommand": "java -version",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	"remoteUser": "vscode",
+	"features": {
+		"git": "latest",
+		"github-cli": "latest"
+	}
 }
