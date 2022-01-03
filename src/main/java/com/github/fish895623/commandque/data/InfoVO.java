@@ -1,4 +1,4 @@
-package com.github.fish895623.commandque;
+package com.github.fish895623.commandque.data;
 
 public class InfoVO {
   private String id;
