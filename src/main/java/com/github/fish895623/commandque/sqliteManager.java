@@ -9,12 +9,14 @@ import java.sql.SQLException;
 public class sqliteManager {
   private String file;
   private String filename;
+  private Connection connection = null;
 
   public void setFilename(String val) {
     this.filename = val;
     this.file = "jdbc:sqlite:" + filename;
   }
 
+  // attach Database first
   public void createNewDatabase() {
     if (!checkFileExists()) {
       try (Connection conn = DriverManager.getConnection(this.file)) {
@@ -34,6 +36,14 @@ public class sqliteManager {
   boolean checkFileExists() {
     File f = new File(this.filename);
     return f.exists();
+  }
+
+  public void attachDatabase() {
+    try {
+      this.connection = DriverManager.getConnection(this.file);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public static void main(String[] args) {
