@@ -6,7 +6,9 @@ import java.sql.*;
 public class sqliteManager {
   private String file;
   private String filename;
-  private Connection connection = null;
+  private Connection connection;
+
+  public ResultSet rs;
 
   public void setFilename(String val) {
     this.filename = val;
@@ -47,19 +49,23 @@ public class sqliteManager {
    * @param qry
    *         sqlite query
    */
-  public ResultSet executeQuery(String qry) {
-    try (Statement stat = connection.createStatement()) {
-      ResultSet rs = stat.executeQuery(qry);
-      return rs;
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
+  public String[] executeQuery(String qry, String val1, String val2) throws SQLException {
+    Statement stat = connection.createStatement();
+    this.rs = stat.executeQuery(qry);
+    String[] result = {this.rs.getString(val1), this.rs.getString(val2)};
+    return result;
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws SQLException {
     sqliteManager app = new sqliteManager();
     app.setFilename("a.db");
+    app.attachDatabase();
+
+    String[] a = app.executeQuery("SELECT ID, NAME FROM tabe", "ID", "NAME");
+
+    for (String i : a) {
+      System.out.println(i);
+    }
 
     app.createNewDatabase();
   }
