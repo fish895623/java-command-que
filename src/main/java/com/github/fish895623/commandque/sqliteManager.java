@@ -1,10 +1,7 @@
 package com.github.fish895623.commandque;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class sqliteManager {
   private String file;
@@ -44,6 +41,20 @@ public class sqliteManager {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * @param qry
+   *         sqlite query
+   */
+  public ResultSet executeQuery(String qry) {
+    try (Statement stat = connection.createStatement()) {
+      ResultSet rs = stat.executeQuery(qry);
+      return rs;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public static void main(String[] args) {
