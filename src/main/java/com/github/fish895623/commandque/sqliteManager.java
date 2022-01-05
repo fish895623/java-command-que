@@ -11,16 +11,17 @@ public class sqliteManager {
   String file;
   String filename;
 
-  sqliteManager(String filename) {
+  /**
+   * @param filename
+   *         Database filename
+   */
+  public sqliteManager(String filename) {
     this.filename = filename;
     this.file = "jdbc:sqlite:" + filename;
   }
 
-  /**
-   * @param filename Database filename
-   */
   public void createNewDatabase() {
-    if (checkFileExists() == false) {
+    if (!checkFileExists()) {
       try (Connection conn = DriverManager.getConnection(this.file)) {
         if (conn != null) {
           DatabaseMetaData meta = conn.getMetaData();
