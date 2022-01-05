@@ -1,36 +1,19 @@
 package com.github.fish895623.commandque;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class sqliteManager {
-  // TODO Change to Builder pattern
-  private final String file;
-  private final String filename;
+  private String file;
+  private String filename;
+  private Connection connection = null;
 
-  public static class Builder {
-    private String filename;
-    private String file;
-
-    public Builder setFilename(String val) {
-      this.filename = val;
-      this.file = "jdbc:sqlite:" + filename;
-      return this;
-    }
-
-    public sqliteManager build() {
-      return new sqliteManager(this);
-    }
+  public void setFilename(String val) {
+    this.filename = val;
+    this.file = "jdbc:sqlite:" + filename;
   }
 
-  public sqliteManager(Builder builder) {
-    this.file = builder.file;
-    this.filename = builder.filename;
-  }
-
+  // attach Database first
   public void createNewDatabase() {
     if (!checkFileExists()) {
       try (Connection conn = DriverManager.getConnection(this.file)) {
@@ -52,16 +35,32 @@ public class sqliteManager {
     return f.exists();
   }
 
-  /**
-   * Attach to sqlite
-   */
   public void attachDatabase() {
+    try {
+      this.connection = DriverManager.getConnection(this.file);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * @param qry
+   *         sqlite query
+   */
+  public ResultSet executeQuery(String qry) {
+    try (Statement stat = connection.createStatement()) {
+      ResultSet rs = stat.executeQuery(qry);
+      return rs;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public static void main(String[] args) {
-    sqliteManager app = new sqliteManager.Builder()
-            .setFilename("a.db")
-            .build();
+    sqliteManager app = new sqliteManager();
+    app.setFilename("a.db");
+
     app.createNewDatabase();
   }
 }
