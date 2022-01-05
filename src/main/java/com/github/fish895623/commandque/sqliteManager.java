@@ -7,28 +7,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class sqliteManager {
-  // TODO Change to Builder pattern
-  private final String file;
-  private final String filename;
+  private String file;
+  private String filename;
 
-  public static class Builder {
-    private String filename;
-    private String file;
-
-    public Builder setFilename(String val) {
-      this.filename = val;
-      this.file = "jdbc:sqlite:" + filename;
-      return this;
-    }
-
-    public sqliteManager build() {
-      return new sqliteManager(this);
-    }
-  }
-
-  public sqliteManager(Builder builder) {
-    this.file = builder.file;
-    this.filename = builder.filename;
+  public void setFilename(String val) {
+    this.filename = val;
+    this.file = "jdbc:sqlite:" + filename;
   }
 
   public void createNewDatabase() {
@@ -52,16 +36,10 @@ public class sqliteManager {
     return f.exists();
   }
 
-  /**
-   * Attach to sqlite
-   */
-  public void attachDatabase() {
-  }
-
   public static void main(String[] args) {
-    sqliteManager app = new sqliteManager.Builder()
-            .setFilename("a.db")
-            .build();
+    sqliteManager app = new sqliteManager();
+    app.setFilename("a.db");
+
     app.createNewDatabase();
   }
 }
