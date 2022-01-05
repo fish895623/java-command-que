@@ -59,7 +59,9 @@ public class sqliteManager {
   }
 
   public static void main(String[] args) {
-    sqliteManager app = new sqliteManager.Builder().setFilename("a.db").build();
+    sqliteManager app = new sqliteManager.Builder()
+            .setFilename("a.db")
+            .build();
     app.createNewDatabase();
   }
 }
