@@ -8,16 +8,27 @@ import java.sql.SQLException;
 
 public class sqliteManager {
   // TODO Change to Builder pattern
-  String file;
-  String filename;
+  private final String file;
+  private final String filename;
 
-  /**
-   * @param filename
-   *         Database filename
-   */
-  public sqliteManager(String filename) {
-    this.filename = filename;
-    this.file = "jdbc:sqlite:" + filename;
+  public static class Builder {
+    private String filename;
+    private String file;
+
+    public Builder setFilename(String val) {
+      this.filename = val;
+      this.file = "jdbc:sqlite:" + filename;
+      return this;
+    }
+
+    public sqliteManager build() {
+      return new sqliteManager(this);
+    }
+  }
+
+  public sqliteManager(Builder builder) {
+    this.file = builder.file;
+    this.filename = builder.filename;
   }
 
   public void createNewDatabase() {
@@ -48,7 +59,7 @@ public class sqliteManager {
   }
 
   public static void main(String[] args) {
-    sqliteManager app = new sqliteManager("a.db");
+    sqliteManager app = new sqliteManager.Builder().setFilename("a.db").build();
     app.createNewDatabase();
   }
 }
