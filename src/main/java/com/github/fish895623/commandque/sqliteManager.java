@@ -7,17 +7,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class sqliteManager {
-  String file;
-  String filename;
+  static String file;
+  static String filename;
 
-  sqliteManager(String filename) {
-    this.filename = filename;
-    this.file = "jdbc:sqlite:" + filename;
+  public static void setFilename(String val) {
+    filename = val;
+    file = "jdbc:sqlite:" + filename;
   }
 
-  public void createNewDatabase() {
+  public static void createNewDatabase() {
     if (!checkFileExists()) {
-      try (Connection conn = DriverManager.getConnection(this.file)) {
+      try (Connection conn = DriverManager.getConnection(file)) {
         if (conn != null) {
           DatabaseMetaData meta = conn.getMetaData();
           System.out.println(meta.getDriverName());
@@ -31,14 +31,14 @@ public class sqliteManager {
   /**
    * check database file exists
    */
-  boolean checkFileExists() {
-    File f = new File(this.filename);
+  static boolean checkFileExists() {
+    File f = new File(filename);
     return f.exists();
   }
 
   /**
    * Attach to sqlite
    */
-  public void attachDatabase() {
+  public static void attachDatabase() {
   }
 }
