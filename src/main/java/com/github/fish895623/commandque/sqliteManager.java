@@ -15,9 +15,6 @@ public class sqliteManager {
     this.file = "jdbc:sqlite:" + filename;
   }
 
-  /**
-   * @param filename Database filename
-   */
   public void createNewDatabase() {
     if (!checkFileExists()) {
       try (Connection conn = DriverManager.getConnection(this.file)) {
@@ -43,6 +40,5 @@ public class sqliteManager {
    * Attach to sqlite
    */
   public void attachDatabase() {
-
   }
 }
