@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
 
 public class JsonController {
   private final Logger logger = LoggerFactory.getLogger(JsonController.class);
@@ -26,14 +25,13 @@ public class JsonController {
   public void lockFile(String file, String mode) {
     RandomAccessFile r;
     FileChannel c;
-    FileLock l = null;
 
     try {
       r = new RandomAccessFile(file, mode);
       logger.info("RandomAccessFile");
       c = r.getChannel();
       try {
-        l = c.lock();
+        c.lock();
         logger.info("File Locked");
       } catch (IOException e) {
         logger.error(e.getMessage());
