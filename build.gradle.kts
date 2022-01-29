@@ -23,7 +23,7 @@ repositories {
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web:2.6.3")
   implementation("org.xerial:sqlite-jdbc:3.36.0.2")
-  developmentOnly("org.springframework.boot:spring-boot-devtools:2.6.2")
+  developmentOnly("org.springframework.boot:spring-boot-devtools:2.6.3")
   testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.3")
 }
 
