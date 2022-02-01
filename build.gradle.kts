@@ -30,32 +30,13 @@ configurations {
 }
 
 dependencies {
+  implementation("org.xerial:sqlite-jdbcm:3.36.0.2")
+  implementation("org.apache.logging.log4j:log4j-core:2.17.0")
+  implementation("org.apache.logging.log4j:log4j-api:2.17.0")
+  implementation("org.springframework.boot:spring-boot-starter-log4j2:2.6.3")
+  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.1")
+  implementation("com.fasterxml.jackson.core:jackson-databind:2.13.1")
   implementation("org.springframework.boot:spring-boot-starter-web:2.6.3")
-  implementation("org.xerial:sqlite-jdbc:3.36.0.2")
-  implementation(
-    group = "org.apache.logging.log4j",
-    name = "log4j-core",
-    version = "2.17.0"
-  )
-  implementation(
-    group = "org.apache.logging.log4j",
-    name = "log4j-api",
-    version = "2.17.0"
-  )
-  implementation(
-    group = "org.springframework.boot",
-    name = "spring-boot-starter-log4j2"
-  )
-  implementation(
-    group = "com.fasterxml.jackson.dataformat",
-    name = "jackson-dataformat-yaml",
-    version = "2.9.8"
-  )
-  implementation(
-    group = "com.fasterxml.jackson.core",
-    name = "jackson-databind",
-    version = "2.9.8"
-  )
   developmentOnly("org.springframework.boot:spring-boot-devtools:2.6.3")
   testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.3")
 }
