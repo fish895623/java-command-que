@@ -1,7 +1,6 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-  kotlin("jvm") version "1.6.10"
   id("org.springframework.boot") version "2.6.1"
   id("io.spring.dependency-management") version "1.0.11.RELEASE" apply true
   id("java")
@@ -22,9 +21,9 @@ repositories {
 }
 
 dependencies {
-  implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
   implementation("org.springframework.boot:spring-boot-starter-web:2.6.3")
   implementation("org.xerial:sqlite-jdbc:3.36.0.2")
+  implementation("org.apache.logging.log4j:log4j-core:2.17.0")
   developmentOnly("org.springframework.boot:spring-boot-devtools:2.6.3")
   testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.3")
 }
