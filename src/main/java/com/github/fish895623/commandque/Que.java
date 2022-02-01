@@ -18,4 +18,8 @@ public class Que {
   public static String te() {
     return "asdf";
   }
+
+  public static void main(String[] args) {
+    logger.warn("asdf");
+  }
 }
