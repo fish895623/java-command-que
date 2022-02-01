@@ -21,5 +21,6 @@ public class Que {
 
   public static void main(String[] args) {
     logger.warn("asdf");
+    logger.info("aaa");
   }
 }
