@@ -68,7 +68,7 @@ public class Que {
   }
 
   // TODO Check Table exists
-  // TODO Delete Data
+  // TODO Delete Data https://www.sqlitetutorial.net/sqlite-java/delete/
 
   public Connection connect() throws SQLException {
     String url = "jdbc:sqlite:" + this.dbFileName;
