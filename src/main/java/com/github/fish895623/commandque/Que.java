@@ -16,8 +16,7 @@ public class Que {
     }
   }
 
-  private String dbFileName;
-  private String query;
+  private final String dbFileName;
 
   public Que(Builder builder) {
     this.dbFileName = builder.dbFileName;
@@ -44,7 +43,8 @@ public class Que {
 
   public ResultSet select() throws SQLException {
     String sql = "SELECT ID, USER FROM User";
-    ResultSet resultSet = null;
+    ResultSet resultSet;
+
     Connection conn = this.connect();
     Statement statement = conn.createStatement();
     resultSet = statement.executeQuery(sql);
