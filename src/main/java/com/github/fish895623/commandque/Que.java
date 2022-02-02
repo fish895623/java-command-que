@@ -60,6 +60,8 @@ public class Que {
       preparedStatement.setInt(1, 13);
       preparedStatement.setInt(2, 2);
       preparedStatement.executeUpdate();
+
+      logger.info("Update data");
     } catch (SQLException e) {
       logger.error(e.getMessage());
     }
@@ -71,6 +73,8 @@ public class Que {
 
     try {
       connection = DriverManager.getConnection(url);
+
+      logger.info("Connect to db DriverManager");
     } catch (SQLException e) {
       logger.error(e.getMessage());
     }
