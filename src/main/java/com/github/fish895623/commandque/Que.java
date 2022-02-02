@@ -21,7 +21,6 @@ public class Que {
 
   public Que(Builder builder) {
     this.dbFileName = builder.dbFileName;
-    this.query = builder.query;
   }
 
   public static String te() {
@@ -31,23 +30,52 @@ public class Que {
   public static void main(String[] args) throws SQLException {
     Que a = new Builder()
             .setDBFileName("asdf.db")
-            .setQuery("SELECT ID, USER FROM User")
             .build();
-    ResultSet ab = a.connect();
+
+    a.insert();
+
+    ResultSet ab = a.select();
     while (ab.next()) {
       String id = ab.getString("ID");
       String user = ab.getString("USER");
       System.out.printf("%s %s \n", id, user);
     }
-
   }
 
-  public ResultSet connect() throws SQLException {
-    Connection connection =
-            DriverManager.getConnection("jdbc:sqlite:" + this.dbFileName);
-    Statement statement = connection.createStatement();
-    ResultSet resultSet = statement.executeQuery(this.query);
+  public ResultSet select() throws SQLException {
+    String sql = "SELECT ID, USER FROM User";
+    ResultSet resultSet = null;
+    Connection conn = this.connect();
+    Statement statement = conn.createStatement();
+    resultSet = statement.executeQuery(sql);
     return resultSet;
+  }
+
+  public void insert() {
+    String sql = "INSERT INTO User(ID, USER) VALUES(?, ?)";
+
+    try (Connection connection = this.connect()) {
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+      preparedStatement.setInt(1, 13);
+      preparedStatement.setInt(2, 2);
+      preparedStatement.executeUpdate();
+    } catch (SQLException e) {
+      logger.error(e.getMessage());
+    }
+  }
+
+  public Connection connect() throws SQLException {
+    String url = "jdbc:sqlite:" + this.dbFileName;
+    Connection connection = null;
+
+    try {
+      connection = DriverManager.getConnection(url);
+    } catch (SQLException e) {
+      logger.error(e.getMessage());
+    }
+
+    return connection;
   }
 
   /*
@@ -55,15 +83,9 @@ public class Que {
    */
   public static class Builder {
     private String dbFileName;
-    private String query;
 
     public Builder setDBFileName(String val) {
       this.dbFileName = val;
-      return this;
-    }
-
-    public Builder setQuery(String val) {
-      this.query = val;
       return this;
     }
 
@@ -71,4 +93,5 @@ public class Que {
       return new Que(this);
     }
   }
+
 }
