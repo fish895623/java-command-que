@@ -13,47 +13,47 @@ version = "2021.2"
 
 project {
 
-    buildType(Build)
+  buildType(Build)
 }
 
 object Build : BuildType({
-    name = "Build"
+  name = "Build"
 
+  vcs {
+    root(DslContext.settingsRoot)
+  }
+
+  steps {
+    gradle {
+      tasks = "bootJar"
+    }
+  }
+
+  triggers {
     vcs {
-        root(DslContext.settingsRoot)
     }
+  }
 
-    steps {
-        gradle {
-            tasks = "bootJar"
+  features {
+    commitStatusPublisher {
+      vcsRootExtId = "${DslContext.settingsRoot.id}"
+      publisher = github {
+        githubUrl = "https://api.github.com"
+        authType = personalToken {
+          token =
+            "credentialsJSON:fb871c07-1d54-4a49-8fb8-26a235b2b988"
         }
+      }
     }
-
-    triggers {
-        vcs {
+    pullRequests {
+      vcsRootExtId = "${DslContext.settingsRoot.id}"
+      provider = github {
+        authType = token {
+          token =
+            "credentialsJSON:fb871c07-1d54-4a49-8fb8-26a235b2b988"
         }
+        filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
+      }
     }
-
-    features {
-        commitStatusPublisher {
-            vcsRootExtId = "${DslContext.settingsRoot.id}"
-            publisher = github {
-                githubUrl = "https://api.github.com"
-                authType = personalToken {
-                    token =
-                        "credentialsJSON:fb871c07-1d54-4a49-8fb8-26a235b2b988"
-                }
-            }
-        }
-        pullRequests {
-            vcsRootExtId = "${DslContext.settingsRoot.id}"
-            provider = github {
-                authType = token {
-                    token =
-                        "credentialsJSON:fb871c07-1d54-4a49-8fb8-26a235b2b988"
-                }
-                filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
-            }
-        }
-    }
+  }
 })
