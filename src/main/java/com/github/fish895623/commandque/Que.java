@@ -67,7 +67,7 @@ public class Que {
     }
   }
 
-  // NOTE Test 2
+  // NOTE Test 2 3
   // TODO Check Table exists
   // TODO Delete Data https://www.sqlitetutorial.net/sqlite-java/delete/
 
